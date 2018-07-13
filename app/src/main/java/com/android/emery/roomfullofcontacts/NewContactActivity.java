@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,13 +50,18 @@ public class NewContactActivity extends AppCompatActivity {
                 } else {
                     String contactFirstName = firstNameEditText.getText().toString();
                     String contactLastName = lastNameEditText.getText().toString();
-                    String contactPhone = phoneEditText.getText().toString();
+                    String contactPhone = PhoneNumberUtils.formatNumber(phoneEditText.getText().toString());
                     String contactEmail = emailEditText.getText().toString();
 
                     submitIntent.putExtra(EXTRA_SUBMIT_FIRST, contactFirstName);
                     submitIntent.putExtra(EXTRA_SUBMIT_LAST, contactLastName);
                     submitIntent.putExtra(EXTRA_SUBMIT_PHONE, contactPhone);
                     submitIntent.putExtra(EXTRA_SUBMIT_EMAIL, contactEmail);
+
+                    Log.i("Contact First", contactFirstName);
+                    Log.i("Contact Laat", contactLastName);
+                    Log.i("Contact Phone", contactPhone);
+                    Log.i("Contact Email", contactEmail);
 
                     setResult(RESULT_OK, submitIntent);
                 }
